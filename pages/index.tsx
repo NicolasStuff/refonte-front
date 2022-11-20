@@ -2,13 +2,15 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import styles from '../styles/Home.module.css'
+import { ProductsApi } from '../api-client/apis/ProductsApi'
 
 export default function Home() {
   const [products, setProducts] = useState([]);
   useEffect(() => {
     const path = '/products'
     const fetchTodos = async () => {
-      const res = await fetch(process.env.NEXT_PUBLIC_API_URL + path);
+      const res = await ProductsApi.productsControllerFindAll
+      console.log(res);
       const json = await res.json()
       setProducts(json)
     }
