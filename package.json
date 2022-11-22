@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "types:openapitools": "npx @openapitools/openapi-generator-cli generate -i http://localhost:3001/api-json -g typescript-fetch -o src/services/openapitools"
   },
   "dependencies": {
     "@openapitools/openapi-generator-cli": "^2.5.2",

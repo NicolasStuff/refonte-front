@@ -2,17 +2,18 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import styles from '../styles/Home.module.css'
-import { ProductsApi } from '../api-client/apis/ProductsApi'
+import { ProductsApi } from '../api-client/src/services/openapitools/apis/ProductsApi'
+import { Product } from '../api-client/src/services/openapitools'
 
 export default function Home() {
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState<Product[]>([]);
   useEffect(() => {
+    const products = new ProductsApi();
     const path = '/products'
     const fetchTodos = async () => {
-      const res = await ProductsApi.productsControllerFindAll
+      const res = await products.productsControllerFindAll()
       console.log(res);
-      const json = await res.json()
-      setProducts(json)
+      setProducts(res)
     }
     fetchTodos();
   }, [])
@@ -32,9 +33,13 @@ export default function Home() {
           </h1>
         )}
         {products.length !== 0 && (
-          <h1 className={styles.title}>
-            Product 1 is <a href="https://nextjs.org">{products[0].name}</a>
-          </h1>
+          <>
+            {products.map((product, i) => (
+              <h1 className={styles.title} key={i}>
+                Product 1 is <a href="https://nextjs.org">{product.name}</a>
+              </h1>
+            ))}
+          </>
         )}
       </main>
 

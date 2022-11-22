@@ -2,6 +2,21 @@
   "$schema": "./node_modules/@openapitools/openapi-generator-cli/config.schema.json",
   "spaces": 2,
   "generator-cli": {
-    "version": "6.2.1"
+    "version": "6.2.1",
+    "generators": {
+      "products": {
+        "generatorName": "typescript-fetch",
+        "inputSpec": "localhost:3001/api-json",
+        "output": "#{cwd}/src/services/openapitools",
+        "removeOperationIdPrefix": true,
+        "additionalProperties": {
+          "enumPropertyNaming": "original",
+          "modelPropertyNaming": "original",
+          "paramNaming": "original",
+          "prefixParameterInterfaces": true,
+          "supportsES6": true
+        }
+      }
+    }
   }
 }
